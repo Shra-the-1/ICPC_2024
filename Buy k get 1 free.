@@ -1,0 +1,86 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define endl '\n'
+
+//mocros for looping
+#define FOR(i,a,b) for(int i=(a);i<(b);i++)
+#define FORk(i,a,b,k) for(int i=(a);i<(b);i+=k)
+#define RFOR(i,a,b) for(int i=(a);i>=(b);i--)
+#define RFORk(i,a,b,k) for(int i=(a);i>=(b);i-=k)
+
+#define pb push_back
+#define F first
+#define S second
+typedef vector<int> vi;
+typedef vector<string> vs;
+typedef long long int ll;
+typedef unsigned long long int ull;
+typedef vector<ll> vll;
+typedef vector<ull> vull;
+const int mod = 1e9+7;
+
+
+//macros own
+#define up upper_bound
+#define lb lower_bound
+typedef pair<int,int> pii;
+typedef vector <pii> vpii;
+//IO
+#define inint(x) int x; cin >> x;
+#define invec(vec, n) vi vec(n); for (int i = 0; i < n; i++) cin >> vec[i];
+#define outvec(vec, n) for (int i = 0; i < n; i++) cout << vec[i]<<" ";cout<<'\n';
+
+
+
+void solve(){
+    
+    cout<<endl<<endl;
+    
+    //input
+    inint(n);inint(k);invec(cost,n);
+    
+    //sort 
+    sort( cost.begin() , cost.end() );
+    outvec(cost, cost.size() )
+    
+    //lookUPTable
+    vi lookup(n);int sum=0;
+    FOR(i,0,n){
+        sum+=cost[i];
+        lookup[i]=sum;
+    }
+    outvec(lookup, lookup.size() )
+    
+    //Main
+    FOR(m,0,n){
+        int dis=(m+1)/(k+1);
+        int oup=lookup[m];
+        int ptr=m+1;
+        FOR(i,0,dis){
+            ptr-= (k+1) ;
+            oup-=cost[ptr];
+        }
+        cout<<oup<<" ";
+    }
+    cout<<endl;
+
+}
+
+
+
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    
+    
+    int TestCases=1;
+    cin>> TestCases;
+    while(TestCases--) {
+        solve();
+    } 
+
+    return 0;
+}
